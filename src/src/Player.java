@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 public class Player {
     private final Socket socket;
-    private BufferedReader in;
+    private BufferedReader inR;
     private DataOutputStream out;
     private final Thread inT;
     private boolean isConnected;
@@ -18,24 +18,40 @@ public class Player {
     {
         socket=in;
         try {
-            this.in=new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            out=new DataOutputStream(socket.getOutputStream());
-            isConnected=true;
+            this.inR=new BufferedReader(new InputStreamReader(socket.getInputStream()));//Setting up incoming Reader
+            out=new DataOutputStream(socket.getOutputStream());//setting up outgoing data
+            isConnected=true;//Thread boolean
         } catch (IOException ex) {
             Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
         }
-        inT=new Thread(new Runnable() {
+        inT=new Thread(new Runnable() {//Thread for incoming Data
             @Override
             public void run() {
+                String[] splitData=new String[2];
                 while(isConnected)
                 {
+                    try {
+                        splitData=inR.readLine().split(":");
+                    } catch (IOException ex) {
+                        isConnected=false;
+                        Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     
                 }
             }
         });
+        inT.start();
+    }
+    public boolean isConnected()
+    {
+        return isConnected;
     }
     public void sendData(String data)
     {
-        
+        try {
+            out.writeBytes(data);
+        } catch (IOException ex) {
+            Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
