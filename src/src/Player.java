@@ -31,7 +31,7 @@ public class Player {
                 while(isConnected)
                 {
                     try {
-                        splitData=inR.readLine().split(":");
+                        splitData=inR.readLine().split(":");//Splits incoming data
                     } catch (IOException ex) {
                         isConnected=false;
                         Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);

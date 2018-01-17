@@ -37,6 +37,8 @@ public class clientHandler {
         {
             if(currentGames.get(i).getGameNumber()==gameNumber)
             {
+                players.add(currentGames.get(i).getPlayers()[1]);//Getting the players back into the player list
+                players.add(currentGames.get(i).getPlayers()[0]);
                 currentGames.remove(i);
                 return;
             }

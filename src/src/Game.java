@@ -19,14 +19,26 @@ public class Game {
     public void endGame()//Called when game is won
     {
         int winner=board.getWinner();
-        if(winner==1)players[0].sendData("Game Finished:true");
-        else if(winner==-1)players[1].sendData("Game Finished:false");
+        if(winner==1)
+        {
+            players[0].sendData("Game Finished:true");
+            players[1].sendData("Game Finished:false");
+        }
+        else if(winner==-1)
+        {
+            players[0].sendData("Game Finished:false");
+            players[1].sendData("Game Finished:true");
+        }
         else
         {
             players[0].sendData("Game Finished:false");
             players[1].sendData("Game Finished:false");
         }
         Main.finishGame(gameNumber);
+    }
+    public Player[] getPlayers()
+    {
+        return players;
     }
     public void start()
     {
