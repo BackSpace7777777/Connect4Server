@@ -1,21 +1,31 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package src;
 
-/**
- *
- * @author tyle4760
- */
-public class Main {
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-    /**
-     * @param args the command line arguments
-     */
+public class Main {
+    private static ServerSocket welcomeSocket;
+    private static clientHandler ch;
     public static void main(String[] args) {
-        // TODO code application logic here
+        try
+        {
+            welcomeSocket=new ServerSocket(9876);//Opening port to this port
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ch=new clientHandler();
+        while(true)
+        {
+            try
+            {
+                Socket in=welcomeSocket.accept();//Accepts new connecting clients
+                ch.add(in);//Adds them to the client handler
+            } catch (IOException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
-    
 }
