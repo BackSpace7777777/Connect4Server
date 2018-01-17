@@ -1,0 +1,9 @@
+[Outgoing]
+Game Number:(Game Number)
+Game Start:(boolean for turn)
+Turn:(Boolean to players)
+Won:(boolean to player)
+
+[Incoming]
+Move:(x Position)
+Disconnect:(int reason)
