@@ -5,11 +5,16 @@ public class Board {
     public Board()
     {
         winner=0;
-        for(int x=0;x<7;x++)for(int y=0;y<6;y++)b[x][y]=0;
+        for(int x=0;x<7;x++)for(int y=0;y<6;y++)b[x][y]=0;//Setting everything to 0
     }
     public boolean checkWin()
     {
-        if(diagonalCheck()!=0)
+        if(!isFilled())
+        {
+            winner=0;
+            return true;
+        }
+        else if(diagonalCheck()!=0)
         {
             winner=diagonalCheck();
             return true;
@@ -41,6 +46,17 @@ public class Board {
             }
         }
         return false;
+    }
+    private boolean isFilled()
+    {
+        for(int x=0;x<7;x++)
+        {
+            for(int y=0;y<6;y++)
+            {
+                if(b[x][y]==0)return false;
+            }
+        }
+        return true;
     }
     private int diagonalCheck()
     {

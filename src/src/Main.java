@@ -28,4 +28,8 @@ public class Main {
             }
         }
     }
+    public static void finishGame(int gameNumber)
+    {
+        ch.finishGame(gameNumber);
+    }
 }

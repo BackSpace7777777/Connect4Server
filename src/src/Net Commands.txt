@@ -3,6 +3,7 @@ Game Number:(Game Number)
 Game Start:(boolean for turn)
 Turn:(Boolean to players)
 Won:(boolean to player)
+Game Finished:(boolean to player)
 
 [Incoming]
 Move:(x Position)

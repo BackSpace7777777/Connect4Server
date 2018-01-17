@@ -23,6 +23,7 @@ public class clientHandler {
                         players.remove(0);
                         temp.start();
                         currentGames.add(temp);//Adds temp game to the list of current games
+                        checkPlayers();
                     }
                     catch(NullPointerException | IndexOutOfBoundsException ex){}
                 }
@@ -30,8 +31,31 @@ public class clientHandler {
         });
         matchMaker.start();//Starts thread
     }
+    public void finishGame(int gameNumber)
+    {
+        for(int i=0;i<currentGames.size();i++)
+        {
+            if(currentGames.get(i).getGameNumber()==gameNumber)
+            {
+                currentGames.remove(i);
+                return;
+            }
+        }
+    }
+    private void checkPlayers()
+    {
+        for(int i=0;i<players.size();i++)
+        {
+            if(!players.get(i).isConnected())
+            {
+                players.remove(i);
+                checkPlayers();
+                return;
+            }
+        }
+    }
     public void add(Socket in)
     {
-        
+        players.add(new Player(in));
     }
 }

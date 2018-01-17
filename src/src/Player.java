@@ -51,6 +51,7 @@ public class Player {
         try {
             out.writeBytes(data);
         } catch (IOException ex) {
+            isConnected=false;
             Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
