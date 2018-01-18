@@ -36,11 +36,28 @@ public class Player {
                         isConnected=false;
                         Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    
+                    if(splitData[0].equals("Disconnect"))
+                    {
+                        String reason=splitData[1];
+                        drop();
+                    }
+                    else
+                    {
+                        Main.clientHandlerCommand(splitData[0]+splitData[1]);//Sends all other data to the client handler
+                    }
                 }
             }
         });
         inT.start();
+    }
+    public void drop()
+    {
+        isConnected=false;
+        try {
+            socket.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     public boolean isConnected()
     {

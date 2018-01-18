@@ -56,6 +56,15 @@ public class clientHandler {
             }
         }
     }
+    public void command(String in)
+    {
+        String splitData[]=in.split(":");
+        if(splitData[0].equals("Move"))
+        {
+            String split2[]=splitData[1].split(",");
+            currentGames.get(Integer.parseInt(split2[1])).play(Integer.parseInt(split2[0]));
+        }
+    }
     public void add(Socket in)
     {
         players.add(new Player(in));

@@ -4,7 +4,8 @@ Game Start:(boolean for turn)
 Turn:(Boolean to players)
 Won:(boolean to player)
 Game Finished:(boolean to player)
+Piece:(x Position),(int player (1||0))
 
 [Incoming]
-Move:(x Position)
-Disconnect:(int reason)
+Move:(x Position),(Game Number)
+Disconnect:(String reason)

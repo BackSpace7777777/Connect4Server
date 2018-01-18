@@ -28,6 +28,10 @@ public class Main {
             }
         }
     }
+    public static void clientHandlerCommand(String in)
+    {
+        ch.command(in);
+    }
     public static void finishGame(int gameNumber)
     {
         ch.finishGame(gameNumber);
