@@ -2,9 +2,8 @@
 Game Number:(Game Number)
 Game Start:(boolean for turn)
 Turn:(Boolean to players)
-Won:(boolean to player)
 Game Finished:(boolean to player)
-Piece:(x Position),(int player (1||0))
+Piece:(x Position),(int player (1||-1))
 
 [Incoming]
 Move:(x Position),(Game Number)

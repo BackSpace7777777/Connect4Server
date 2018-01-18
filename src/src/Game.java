@@ -21,7 +21,7 @@ public class Game {
             board.playPiece(x, 1);
             players[0].sendData("Turn:false");
             players[1].sendData("Turn:true");
-            players[1].sendData("Piece:"+x+",1");
+            players[1].sendData("Piece:"+x+",-1");
             players[0].sendData("Piece:"+x+",1");
             turn=false;
         }
@@ -30,7 +30,7 @@ public class Game {
             board.playPiece(x,-1);
             players[0].sendData("Turn:true");
             players[1].sendData("Turn:false");
-            players[1].sendData("Piece:"+x+",-1");
+            players[1].sendData("Piece:"+x+",1");
             players[0].sendData("Piece:"+x+",-1");
             turn=true;
         }
@@ -41,21 +41,19 @@ public class Game {
     }
     public void endGame()//Called when game is won
     {
-        int winner=board.getWinner();
-        if(winner==1)
-        {
-            players[0].sendData("Game Finished:true");
-            players[1].sendData("Game Finished:false");
-        }
-        else if(winner==-1)
-        {
-            players[0].sendData("Game Finished:false");
-            players[1].sendData("Game Finished:true");
-        }
-        else
-        {
-            players[0].sendData("Game Finished:false");
-            players[1].sendData("Game Finished:false");
+        switch (board.getWinner()) {
+            case 1:
+                players[0].sendData("Game Finished:true");
+                players[1].sendData("Game Finished:false");
+                break;
+            case -1:
+                players[0].sendData("Game Finished:false");
+                players[1].sendData("Game Finished:true");
+                break;
+            default:
+                players[0].sendData("Game Finished:false");
+                players[1].sendData("Game Finished:false");
+                break;
         }
         Main.finishGame(gameNumber);
     }

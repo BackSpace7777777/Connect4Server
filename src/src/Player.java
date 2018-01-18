@@ -66,7 +66,7 @@ public class Player {
     public void sendData(String data)
     {
         try {
-            out.writeBytes(data);
+            out.writeBytes(data+"\r");
         } catch (IOException ex) {
             isConnected=false;
             Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
