@@ -59,6 +59,7 @@ public class clientHandler {
     public void command(String in)
     {
         String splitData[]=in.split(":");
+        System.out.println(in);
         if(splitData[0].equals("Move"))
         {
             String split2[]=splitData[1].split(",");
@@ -68,5 +69,6 @@ public class clientHandler {
     public void add(Socket in)
     {
         players.add(new Player(in));
+        System.out.println(in.getInetAddress());
     }
 }

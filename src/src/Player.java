@@ -32,19 +32,20 @@ public class Player {
                 {
                     try {
                         splitData=inR.readLine().split(":");//Splits incoming data
+                        if(splitData[0].equals("Disconnect"))
+                        {
+                            String reason=splitData[1];
+                            drop();
+                        }
+                        else
+                        {
+                            Main.clientHandlerCommand(splitData[0]+":"+splitData[1]);//Sends all other data to the client handler
+                        }
                     } catch (IOException ex) {
                         isConnected=false;
-                        Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    if(splitData[0].equals("Disconnect"))
-                    {
-                        String reason=splitData[1];
                         drop();
                     }
-                    else
-                    {
-                        Main.clientHandlerCommand(splitData[0]+splitData[1]);//Sends all other data to the client handler
-                    }
+                    
                 }
             }
         });
@@ -52,12 +53,11 @@ public class Player {
     }
     public void drop()
     {
+        System.out.println("Dropping "+socket.getInetAddress());
         isConnected=false;
         try {
             socket.close();
-        } catch (IOException ex) {
-            Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } catch (IOException ex) {}
     }
     public boolean isConnected()
     {

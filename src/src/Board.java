@@ -37,6 +37,7 @@ public class Board {
     }
     public boolean playPiece(int x,int player)
     {
+        if(checkWin())return false;
         for(int i=0;i<6;i++)
         {
             if(b[x][i]==0)

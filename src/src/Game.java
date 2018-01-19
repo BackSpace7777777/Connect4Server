@@ -18,21 +18,55 @@ public class Game {
     {
         if(turn)
         {
-            board.playPiece(x, 1);
-            players[0].sendData("Turn:false");
-            players[1].sendData("Turn:true");
-            players[1].sendData("Piece:"+x+",-1");
-            players[0].sendData("Piece:"+x+",1");
-            turn=false;
+            if(board.playPiece(x, 1))
+            {
+                players[0].sendData("Turn:false");
+                players[1].sendData("Turn:true");
+                players[1].sendData("Piece:"+x+",-1");
+                players[0].sendData("Piece:"+x+",1");
+                turn=false;
+            }
+            else
+            {
+                if(board.checkWin())
+                {
+                    endGame();
+                }
+                else
+                {
+                    players[0].sendData("Turn:true");
+                    players[1].sendData("Turn:false");
+                    players[1].sendData("Piece:"+x+",1");
+                    players[0].sendData("Piece:"+x+",-1");
+                    turn=true;
+                }
+            }
         }
         else
         {
-            board.playPiece(x,-1);
-            players[0].sendData("Turn:true");
-            players[1].sendData("Turn:false");
-            players[1].sendData("Piece:"+x+",1");
-            players[0].sendData("Piece:"+x+",-1");
-            turn=true;
+            if(board.playPiece(x,-1))
+            {
+                players[0].sendData("Turn:true");
+                players[1].sendData("Turn:false");
+                players[1].sendData("Piece:"+x+",1");
+                players[0].sendData("Piece:"+x+",-1");
+                turn=true;
+            }
+            else
+            {
+                if(board.checkWin())
+                {
+                    endGame();
+                }
+                else
+                {
+                    players[0].sendData("Turn:false");
+                    players[1].sendData("Turn:true");
+                    players[1].sendData("Piece:"+x+",-1");
+                    players[0].sendData("Piece:"+x+",1");
+                    turn=false;
+                }
+            }
         }
     }
     public int getGameNumber()
