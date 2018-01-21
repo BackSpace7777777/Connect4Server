@@ -17,16 +17,19 @@ public class Board {
         else if(diagonalCheck()!=0)
         {
             winner=diagonalCheck();
+            System.out.println("Diagonal Win");
             return true;
         }
         else if(verticalCheck()!=0)
         {
             winner=verticalCheck();
+            System.out.println("Vertical Win");
             return true;
         }
         else if(horizontalCheck()!=0)
         {
             winner=horizontalCheck();
+            System.out.println("Horizontal Win");
             return true;
         }
         return false;
