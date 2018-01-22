@@ -24,6 +24,7 @@ public class Game {
                 players[1].sendData("Turn:true");
                 players[1].sendData("Piece:"+x+",-1");
                 players[0].sendData("Piece:"+x+",1");
+                if(board.checkWin())endGame();
                 turn=false;
             }
             else
@@ -36,8 +37,6 @@ public class Game {
                 {
                     players[0].sendData("Turn:true");
                     players[1].sendData("Turn:false");
-                    players[1].sendData("Piece:"+x+",1");
-                    players[0].sendData("Piece:"+x+",-1");
                     turn=true;
                 }
             }
@@ -50,6 +49,7 @@ public class Game {
                 players[1].sendData("Turn:false");
                 players[1].sendData("Piece:"+x+",1");
                 players[0].sendData("Piece:"+x+",-1");
+                if(board.checkWin())endGame();
                 turn=true;
             }
             else
@@ -62,8 +62,6 @@ public class Game {
                 {
                     players[0].sendData("Turn:false");
                     players[1].sendData("Turn:true");
-                    players[1].sendData("Piece:"+x+",-1");
-                    players[0].sendData("Piece:"+x+",1");
                     turn=false;
                 }
             }

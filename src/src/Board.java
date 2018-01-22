@@ -9,7 +9,7 @@ public class Board {
     }
     public boolean checkWin()
     {
-        if(!isFilled())
+        if(isFilled())
         {
             winner=0;
             return true;
@@ -53,14 +53,15 @@ public class Board {
     }
     private boolean isFilled()
     {
+        boolean filled=true;
         for(int x=0;x<7;x++)
         {
             for(int y=0;y<6;y++)
             {
-                if(b[x][y]==0)return false;
+                if(b[x][y]==0)filled=false;
             }
         }
-        return true;
+        return filled;
     }
     private int diagonalCheck()
     {
@@ -71,7 +72,7 @@ public class Board {
                 int temp=b[x][y];
                 temp+=b[x+1][y+1];
                 temp+=b[x+2][y+2];
-                temp+=b[x+3][y+2];
+                temp+=b[x+3][y+3];
                 if(temp==4)return 1;
                 else if(temp==-4)return -1;
             }

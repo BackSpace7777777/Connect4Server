@@ -14,6 +14,7 @@ public class clientHandler {
         matchMaker=new Thread(new Runnable() {
             @Override
             public void run() {
+                System.out.println("Server started");
                 while(true)
                 {
                     try
@@ -25,7 +26,8 @@ public class clientHandler {
                         currentGames.add(temp);//Adds temp game to the list of current games
                         checkPlayers();
                     }
-                    catch(NullPointerException | IndexOutOfBoundsException ex){}
+                    catch(NullPointerException ex){}
+                    catch(IndexOutOfBoundsException ex){}
                 }
             }
         });
@@ -33,16 +35,10 @@ public class clientHandler {
     }
     public void finishGame(int gameNumber)
     {
-        for(int i=0;i<currentGames.size();i++)
-        {
-            if(currentGames.get(i).getGameNumber()==gameNumber)
-            {
-                players.add(currentGames.get(i).getPlayers()[1]);//Getting the players back into the player list
-                players.add(currentGames.get(i).getPlayers()[0]);
-                currentGames.remove(i);
-                return;
-            }
-        }
+        Player[] tempPlayers=currentGames.get(gameNumber).getPlayers();
+        currentGames.remove(gameNumber);
+        players.add(tempPlayers[1]);//Getting the players back into the player list
+        players.add(tempPlayers[0]);
     }
     private void checkPlayers()
     {
@@ -55,6 +51,21 @@ public class clientHandler {
                 return;
             }
         }
+        for(int i=0;i<currentGames.size();i++)
+        {
+            if(!currentGames.get(i).getPlayers()[0].isConnected() && currentGames.get(i).getPlayers()[1].isConnected())
+            {
+                currentGames.get(i).endGame();
+            }
+            else if(!currentGames.get(i).getPlayers()[1].isConnected() && currentGames.get(i).getPlayers()[0].isConnected())
+            {
+                currentGames.get(i).endGame();
+            }
+            else if(!currentGames.get(i).getPlayers()[1].isConnected() && !currentGames.get(i).getPlayers()[0].isConnected())
+            {
+                currentGames.remove(i);
+            }
+        }
     }
     public void command(String in)
     {
@@ -63,7 +74,11 @@ public class clientHandler {
         if(splitData[0].equals("Move"))
         {
             String split2[]=splitData[1].split(",");
-            currentGames.get(Integer.parseInt(split2[1])).play(Integer.parseInt(split2[0]));
+            try
+            {
+                currentGames.get(Integer.parseInt(split2[1])).play(Integer.parseInt(split2[0]));
+            }
+            catch(IndexOutOfBoundsException ex){}
         }
     }
     public void add(Socket in)

@@ -42,7 +42,7 @@ public class Player {
                             Main.clientHandlerCommand(splitData[0]+":"+splitData[1]);//Sends all other data to the client handler
                         }
                     } catch (IOException ex) {
-                        isConnected=false;
+                        //isConnected=false;
                         drop();
                     }
                     
@@ -68,8 +68,9 @@ public class Player {
         try {
             out.writeBytes(data+"\r");
         } catch (IOException ex) {
-            isConnected=false;
-            Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
+            //isConnected=false;
+            //Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error: " + ex + "\n" + data);
         }
     }
 }
