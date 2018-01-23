@@ -51,15 +51,15 @@ public class clientHandler {
                 return;
             }
         }
-        for(int i=0;i<currentGames.size();i++)
+        for(int i=0;i<currentGames.size();i++)//incase a player gets dropped during a game
         {
             if(!currentGames.get(i).getPlayers()[0].isConnected() && currentGames.get(i).getPlayers()[1].isConnected())
             {
-                currentGames.get(i).endGame();
+                currentGames.get(i).endGame(0);
             }
             else if(!currentGames.get(i).getPlayers()[1].isConnected() && currentGames.get(i).getPlayers()[0].isConnected())
             {
-                currentGames.get(i).endGame();
+                currentGames.get(i).endGame(1);
             }
             else if(!currentGames.get(i).getPlayers()[1].isConnected() && !currentGames.get(i).getPlayers()[0].isConnected())
             {

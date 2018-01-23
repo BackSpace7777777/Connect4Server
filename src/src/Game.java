@@ -89,6 +89,19 @@ public class Game {
         }
         Main.finishGame(gameNumber);
     }
+    public void endGame(int in)
+    {
+        switch(in)
+        {
+            case 1:
+                players[0].sendData("Game Finished:true");
+                break;
+            case 0:
+                players[1].sendData("Game Finished:true");
+                break;
+        }
+        Main.finishGame(gameNumber);
+    }
     public Player[] getPlayers()
     {
         return players;
