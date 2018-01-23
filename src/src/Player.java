@@ -56,8 +56,15 @@ public class Player {
         System.out.println("Dropping "+socket.getInetAddress());
         isConnected=false;
         try {
+            out.writeBytes("Dropped:1");
             socket.close();
-        } catch (IOException ex) {}
+        } catch (IOException ex) {
+            try {
+                socket.close();
+            } catch (IOException ex1) {
+                Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }
     }
     public boolean isConnected()
     {
@@ -71,6 +78,7 @@ public class Player {
             //isConnected=false;
             //Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Error: " + ex + "\n" + data);
+            drop();
         }
     }
 }
