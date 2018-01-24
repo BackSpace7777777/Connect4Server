@@ -106,7 +106,7 @@ public class Game {
     {
         return players;
     }
-    public void start()
+    public void start()//Telling the players to start
     {
         players[0].sendData("Game Start:true");
         players[1].sendData("Game Start:false");

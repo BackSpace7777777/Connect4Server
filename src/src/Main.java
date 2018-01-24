@@ -5,7 +5,11 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+/*
+To run the game on a single machine you have to change the ip in the client to your own ip
+Make sure to run the server first, wait till it says that the server has started then you can run the clients
+You have to run 2 clients because of the way match making is, because it takes 2 clients out of the pool of clients
+*/
 public class Main {
     private static ServerSocket welcomeSocket;
     private static clientHandler ch;

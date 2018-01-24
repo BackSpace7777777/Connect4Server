@@ -9,6 +9,7 @@ public class Board {
     }
     public boolean checkWin()
     {
+        //checks if someone won or not by testing for a diagonal, vertical, and horizontal check
         if(isFilled())
         {
             winner=0;
