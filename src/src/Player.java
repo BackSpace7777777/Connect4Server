@@ -51,7 +51,7 @@ public class Player {
         });
         inT.start();
     }
-    public void drop()
+    public void drop()//Code for dropping the client
     {
         System.out.println("Dropping "+socket.getInetAddress());
         isConnected=false;

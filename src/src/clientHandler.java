@@ -11,7 +11,7 @@ public class clientHandler {
     {
         players=new ArrayList();
         currentGames=new ArrayList();
-        matchMaker=new Thread(new Runnable() {
+        matchMaker=new Thread(new Runnable() {//Match Maker thread
             @Override
             public void run() {
                 System.out.println("Server started");
@@ -36,7 +36,7 @@ public class clientHandler {
     public void finishGame(int gameNumber)
     {
         Player[] tempPlayers=currentGames.get(gameNumber).getPlayers();
-        currentGames.remove(gameNumber);
+        currentGames.remove(gameNumber);//Deletes game
         players.add(tempPlayers[1]);//Getting the players back into the player list
         players.add(tempPlayers[0]);
     }
@@ -44,7 +44,7 @@ public class clientHandler {
     {
         for(int i=0;i<players.size();i++)
         {
-            if(!players.get(i).isConnected())
+            if(!players.get(i).isConnected())//Check is the players not in game are connected
             {
                 players.remove(i);
                 checkPlayers();
@@ -67,7 +67,7 @@ public class clientHandler {
             }
         }
     }
-    public void command(String in)
+    public void command(String in)//Splits incoming message from client to determine what to do
     {
         String splitData[]=in.split(":");
         System.out.println(in);

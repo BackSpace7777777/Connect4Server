@@ -14,15 +14,15 @@ public class Game {
         turn=true;
         board=new Board();//Creates an imaginary board
     }
-    public void play(int x)
+    public void play(int x)//1 is player 0 and -1 is player 1
     {
         if(turn)
         {
-            if(board.playPiece(x, 1))
+            if(board.playPiece(x, 1))//When you play the peice for the local player
             {
-                players[0].sendData("Turn:false");
-                players[1].sendData("Turn:true");
-                players[1].sendData("Piece:"+x+",-1");
+                players[0].sendData("Turn:false");//Tells player 0 that it is not their turn any more
+                players[1].sendData("Turn:true");//Tells opponent that it is their turn
+                players[1].sendData("Piece:"+x+",-1");//Tells both clients who moved where so that they can run the animation
                 players[0].sendData("Piece:"+x+",1");
                 if(board.checkWin())endGame();
                 turn=false;
@@ -87,7 +87,7 @@ public class Game {
                 players[1].sendData("Game Finished:false");
                 break;
         }
-        Main.finishGame(gameNumber);
+        Main.finishGame(gameNumber);//Makes a call to the client client Manager through main
     }
     public void endGame(int in)
     {

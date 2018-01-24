@@ -67,7 +67,7 @@ public class Board {
     {
         for(int x=0;x<4;x++)
         {
-            for(int y=0;y<3;y++)
+            for(int y=0;y<3;y++)//Checks bottem left to top right
             {
                 int temp=b[x][y];
                 temp+=b[x+1][y+1];
@@ -77,7 +77,7 @@ public class Board {
                 else if(temp==-4)return -1;
             }
         }
-        for(int x=0;x<4;x++)
+        for(int x=0;x<4;x++)//Checks top left to bottem right
         {
             for(int y=5;y>2;y--)
             {
